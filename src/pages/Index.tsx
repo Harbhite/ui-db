@@ -5,7 +5,7 @@ import { StudentModal } from "@/components/StudentModal";
 import { Input } from "@/components/ui/input";
 
 const Index = () => {
-  const [students] = useState<Student[]>(() => generateMockStudents(50));
+  const [students] = useState<Student[]>(() => generateMockStudents(1000));
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
 
@@ -18,7 +18,7 @@ const Index = () => {
     <div className="min-h-screen bg-[#f0f0f0] p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl md:text-6xl font-bold mb-8 text-center">
-          Student Directory
+          UI mist Student Directory
         </h1>
         
         <div className="mb-8 max-w-md mx-auto">

@@ -1,3 +1,4 @@
+import React, { useRef } from 'react';
 import { Student } from "@/lib/mockData";
 import html2canvas from 'html2canvas';
 import { Document, Packer, Paragraph } from 'docx';
@@ -12,7 +13,7 @@ interface StudentCardProps {
 }
 
 export function StudentCard({ student, onClick }: StudentCardProps) {
-  const cardRef = React.useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   const downloadAsPNG = async () => {
     if (!cardRef.current) return;

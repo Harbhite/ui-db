@@ -10,7 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Moon, Sun, GrayscaleIcon, SlidersHorizontal } from "lucide-react";
+import { Moon, Sun, SlidersHorizontal, Palette } from "lucide-react";
 
 const Index = () => {
   const [students, setStudents] = useState<Student[]>(() => generateMockStudents(1000));
@@ -72,7 +72,7 @@ const Index = () => {
               onClick={() => setIsGrayscale(!isGrayscale)}
               className="neo-brutalist"
             >
-              <GrayscaleIcon className="h-4 w-4" />
+              <Palette className="h-4 w-4" />
             </Button>
           </div>
 

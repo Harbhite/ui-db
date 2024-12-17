@@ -87,20 +87,25 @@ export function StudentCard({ student, onClick }: StudentCardProps) {
   return (
     <div
       ref={cardRef}
-      className="student-card neo-brutalist neo-brutalist-hover bg-white p-4 cursor-pointer relative group"
+      className="student-card neo-brutalist neo-brutalist-hover bg-white p-6 cursor-pointer relative group"
     >
-      <div onClick={() => onClick(student)}>
-        <img
-          src={student.avatar}
-          alt={student.name}
-          className="w-24 h-24 mx-auto mb-4 rounded-full border-2 border-black"
-        />
-        <h3 className="font-bold text-lg mb-1">{student.name}</h3>
-        <p className="text-sm text-gray-600">{student.major}</p>
-        <p className="text-sm">Year {student.year}</p>
+      <div onClick={() => onClick(student)} className="space-y-4">
+        <div className="relative w-32 h-32 mx-auto">
+          <img
+            src={student.avatar}
+            alt={student.name}
+            className="w-full h-full object-cover rounded-full border-4 border-[#403E43]"
+          />
+          <div className="absolute inset-0 rounded-full shadow-inner"></div>
+        </div>
+        <div className="space-y-2 text-center">
+          <h3 className="font-bold text-xl text-[#403E43]">{student.name}</h3>
+          <p className="text-[#8A898C] font-medium">{student.major}</p>
+          <p className="text-[#403E43]">Year {student.year}</p>
+        </div>
       </div>
       
-      <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
+      <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
         <Button
           variant="outline"
           size="sm"
@@ -108,7 +113,7 @@ export function StudentCard({ student, onClick }: StudentCardProps) {
             e.stopPropagation();
             downloadAsPNG();
           }}
-          className="neo-brutalist p-2"
+          className="neo-brutalist p-2 bg-[#E5DEFF] hover:bg-[#D3CBFF]"
         >
           <Download className="h-4 w-4" />
           PNG
@@ -120,7 +125,7 @@ export function StudentCard({ student, onClick }: StudentCardProps) {
             e.stopPropagation();
             downloadAsPDF();
           }}
-          className="neo-brutalist p-2"
+          className="neo-brutalist p-2 bg-[#FFDEE2] hover:bg-[#FFD1D6]"
         >
           <Download className="h-4 w-4" />
           PDF
@@ -132,7 +137,7 @@ export function StudentCard({ student, onClick }: StudentCardProps) {
             e.stopPropagation();
             downloadAsWord();
           }}
-          className="neo-brutalist p-2"
+          className="neo-brutalist p-2 bg-[#D3E4FD] hover:bg-[#C4DBFF]"
         >
           <Download className="h-4 w-4" />
           DOCX

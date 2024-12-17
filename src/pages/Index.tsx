@@ -15,9 +15,9 @@ const Index = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[#f0f0f0] p-4 md:p-8">
+    <div className="min-h-screen bg-[#F1F0FB] p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl md:text-6xl font-bold mb-8 text-center">
+        <h1 className="text-4xl md:text-6xl font-bold mb-8 text-center text-[#403E43] tracking-tight">
           UI mist Student Directory
         </h1>
         
@@ -27,7 +27,7 @@ const Index = () => {
             placeholder="Search by name or major..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="neo-brutalist w-full p-4 text-lg"
+            className="neo-brutalist w-full p-4 text-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] focus:ring-offset-2"
           />
         </div>
 

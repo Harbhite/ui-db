@@ -6,6 +6,7 @@ export interface Student {
   gpa: number;
   avatar: string;
   email: string;
+  matricNumber: string;
 }
 
 const uiCourses = [
@@ -101,6 +102,7 @@ export const generateMockStudents = (count: number): Student[] => {
     year: years[Math.floor(Math.random() * years.length)],
     gpa: Number((Math.random() * (4.0 - 2.5) + 2.5).toFixed(2)),
     avatar: `https://api.dicebear.com/7.x/personas/svg?seed=${i}`,
-    email: `student${i + 1}@university.edu`
+    email: `student${i + 1}@university.edu`,
+    matricNumber: `UI/${String(new Date().getFullYear()).slice(-2)}/${String(i + 1).padStart(5, '0')}`
   }));
 };

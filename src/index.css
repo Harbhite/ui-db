@@ -107,3 +107,18 @@
 .float {
   animation: float 6s ease-in-out infinite;
 }
+
+/* Rainbow effect for easter egg */
+@keyframes rainbow {
+  0% { border-color: #ff0000; }
+  17% { border-color: #ff8000; }
+  33% { border-color: #ffff00; }
+  50% { border-color: #00ff00; }
+  67% { border-color: #0000ff; }
+  83% { border-color: #8000ff; }
+  100% { border-color: #ff0000; }
+}
+
+.rainbow-border {
+  animation: rainbow 3s linear infinite, float 6s ease-in-out infinite;
+}

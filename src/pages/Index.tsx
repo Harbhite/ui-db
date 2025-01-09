@@ -10,7 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Moon, Sun, SlidersHorizontal, Palette } from "lucide-react";
+import { Moon, Sun, Palette, SlidersHorizontal } from "lucide-react";
 
 const Index = () => {
   const [students, setStudents] = useState<Student[]>(() => generateMockStudents(1000));
@@ -21,6 +21,29 @@ const Index = () => {
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [selectedMajor, setSelectedMajor] = useState<string | null>(null);
   const [sortByCGPA, setSortByCGPA] = useState(false);
+  const [isEasterEggActive, setIsEasterEggActive] = useState(false);
+
+  // Konami Code sequence
+  const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  const [konamiIndex, setKonamiIndex] = useState(0);
+
+  useEffect(() => {
+    const handleKeydown = (e: KeyboardEvent) => {
+      if (e.key === konamiCode[konamiIndex]) {
+        if (konamiIndex === konamiCode.length - 1) {
+          setIsEasterEggActive(prev => !prev);
+          setKonamiIndex(0);
+        } else {
+          setKonamiIndex(prev => prev + 1);
+        }
+      } else {
+        setKonamiIndex(0);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeydown);
+    return () => window.removeEventListener('keydown', handleKeydown);
+  }, [konamiIndex]);
 
   useEffect(() => {
     if (isDarkMode) {
@@ -142,11 +165,12 @@ const Index = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 animate-fade-in">
           {sortedStudents.map((student) => (
-            <StudentCard
-              key={student.id}
-              student={student}
-              onClick={setSelectedStudent}
-            />
+            <div key={student.id} className={isEasterEggActive ? 'rainbow-border' : ''}>
+              <StudentCard
+                student={student}
+                onClick={setSelectedStudent}
+              />
+            </div>
           ))}
         </div>
 

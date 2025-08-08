@@ -10,6 +10,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import { Moon, Sun, Palette, SlidersHorizontal } from "lucide-react";
 
 const Index = () => {
@@ -22,6 +30,8 @@ const Index = () => {
   const [selectedMajor, setSelectedMajor] = useState<string | null>(null);
   const [sortByCGPA, setSortByCGPA] = useState(false);
   const [isEasterEggActive, setIsEasterEggActive] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [studentsPerPage] = useState(12);
 
   // Konami Code sequence
   const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
@@ -75,6 +85,12 @@ const Index = () => {
   const sortedStudents = [...filteredStudents].sort((a, b) => 
     sortByCGPA ? b.gpa - a.gpa : 0
   );
+
+  // Pagination logic
+  const indexOfLastStudent = currentPage * studentsPerPage;
+  const indexOfFirstStudent = indexOfLastStudent - studentsPerPage;
+  const currentStudents = sortedStudents.slice(indexOfFirstStudent, indexOfLastStudent);
+  const totalPages = Math.ceil(sortedStudents.length / studentsPerPage);
 
   return (
     <div className="min-h-screen bg-background text-foreground transition-colors duration-300 dark:bg-[#1A1F2C]">
@@ -163,8 +179,8 @@ const Index = () => {
           />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 animate-fade-in">
-          {sortedStudents.map((student) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:-cols-4 gap-6 animate-fade-in">
+          {currentStudents.map((student) => (
             <div key={student.id} className={isEasterEggActive ? 'rainbow-border' : ''}>
               <StudentCard
                 student={student}
@@ -179,6 +195,34 @@ const Index = () => {
           isOpen={!!selectedStudent}
           onClose={() => setSelectedStudent(null)}
         />
+
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                className={currentPage === 1 ? "pointer-events-none opacity-50" : undefined}
+              />
+            </PaginationItem>
+            {Array.from({ length: totalPages }, (_, i) => (
+              <PaginationItem key={i}>
+                <PaginationLink
+                  href="#"
+                  isActive={i + 1 === currentPage}
+                  onClick={() => setCurrentPage(i + 1)}
+                >
+                  {i + 1}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem>
+              <PaginationNext
+                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                className={currentPage === totalPages ? "pointer-events-none opacity-50" : undefined}
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
       </div>
     </div>
   );
